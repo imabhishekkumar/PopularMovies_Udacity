@@ -1,5 +1,6 @@
 package com.popularmovies.abhis.popularmovies.Activities;
 
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,9 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.recyclerViewID);
         mRecyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
+            mRecyclerView.setLayoutManager(gridLayoutManager);
+        }
+        else {
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+            mRecyclerView.setLayoutManager(gridLayoutManager);
+        }
         movieList = get_movies(buildURL(Constants.SORT_BY_POPULAR));
 
     }
